@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.LoginService;
+import service.RegisterService;
 
 import javax.servlet.ServletContext;
 import java.io.FileInputStream;
@@ -33,12 +34,36 @@ public class HomeController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private RegisterService registerService;
+
     @RequestMapping(value = "/User.json", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> getUser() {
+    public ResponseEntity<Map<String, Object>> getUser(
+            @RequestParam(value = "email") String email,
+            @RequestParam(value = "nickname") String nickname,
+            @RequestParam(value = "password") String password) {
         Map<String, Object> result = new HashMap();
-        result.put("Code", 0);
-        result.put("Msg", "操作成功");
+
+        Userentity user = registerService.getUserByEmail(email);
+        if (user != null) {
+            result.put("Code", 1003);
+            result.put("Msg", "邮箱已被使用");
+        } else {
+            user = registerService.getUserByNickname(nickname);
+            if (user != null) {
+                result.put("Code", 1002);
+                result.put("Msg", "该昵称已被使用");
+            } else {
+                if (registerService.createUser(email, nickname, password)) {
+                    result.put("Code", 0);
+                    result.put("Msg", "操作成功");
+                } else {
+                    result.put("Code", 3003);
+                    result.put("Msg", "注册失败");
+                }
+            }
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Access-Control-Allow-Origin", "*");
@@ -48,7 +73,9 @@ public class HomeController {
 
     @RequestMapping(value = "/Login.json", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> getLogin(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password) {
+    public ResponseEntity<Map<String, Object>> getLogin(
+            @RequestParam(value = "email") String email,
+            @RequestParam(value = "password") String password) {
         Map<String, Object> result = new HashMap();
         Userentity user = loginService.getUserByEmail(email);
 

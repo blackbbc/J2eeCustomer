@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="edb289b0-cd4e-40f8-8176-f79b34696a98" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/images/default.jpeg" afterPath="$PROJECT_DIR$/web/images/default.jpeg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/J2ee-1.0-SNAPSHOT/WEB-INF/classes/controller/HomeController.class" afterPath="$PROJECT_DIR$/target/J2ee-1.0-SNAPSHOT/WEB-INF/classes/controller/HomeController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/controller/HomeController.class" afterPath="$PROJECT_DIR$/target/classes/controller/HomeController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/service/RegisterService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/HomeController.java" afterPath="$PROJECT_DIR$/src/main/java/controller/HomeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dao/UserDao.java" afterPath="$PROJECT_DIR$/src/main/java/dao/UserDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/entity/Userentity.java" afterPath="$PROJECT_DIR$/src/main/java/entity/Userentity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/J2ee-1.0-SNAPSHOT/WEB-INF/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/target/J2ee-1.0-SNAPSHOT/WEB-INF/dispatcher-servlet.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="J2ee.iws" />
@@ -43,11 +43,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HomeController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HomeController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/controller/HomeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.89221555">
-              <caret line="64" column="38" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="125" column="22" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegisterService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/service/RegisterService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4265403">
+              <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -92,10 +104,12 @@
         <option value="$PROJECT_DIR$/src/main/java/jsonObject/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/jsonObject/LoginInfo.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/applicationContext.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/UserDao.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml" />
         <option value="$PROJECT_DIR$/src/main/java/controller/HomeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dao/UserDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/entity/Userentity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/service/RegisterService.java" />
       </list>
     </option>
   </component>
@@ -255,6 +269,80 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="J2ee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="J2ee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="J2ee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="J2ee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="J2ee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="J2ee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -273,7 +361,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="JPA.DatabaseSchemaImportDialog" value="9635b74f-f071-45d4-8b70-576492df38a8" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Java Hello World" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
@@ -650,7 +738,7 @@
       <workItem from="1433317109623" duration="931000" />
       <workItem from="1433327970490" duration="152000" />
       <workItem from="1433328164783" duration="9077000" />
-      <workItem from="1433343531998" duration="2013000" />
+      <workItem from="1433343531998" duration="4740000" />
     </task>
     <task id="LOCAL-00001" summary="Ready to zuo si">
       <created>1433301466771</created>
@@ -676,11 +764,17 @@
       <option name="project" value="LOCAL" />
       <updated>1433343880137</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Avatar">
+      <created>1433345915274</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1433345915274</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40988000" />
+    <option name="totallyTimeSpent" value="43715000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
@@ -695,7 +789,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295099" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2721585" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30865484" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.3623639" order="2" side_tool="true" content_ui="tabs" />
@@ -734,7 +828,8 @@
     <MESSAGE value="Ready to zuo si" />
     <MESSAGE value="zuo si wan bi" />
     <MESSAGE value="LoginFunction" />
-    <option name="LAST_COMMIT_MESSAGE" value="LoginFunction" />
+    <MESSAGE value="Avatar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avatar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1064,26 +1159,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2964072">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/LoginService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51197606">
-          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#428#429#0" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.94311374">
@@ -1113,10 +1188,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/LoginService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51197606">
+          <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#428#429#0" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.72827804">
+          <caret line="65" column="49" selection-start-line="65" selection-start-column="49" selection-end-line="65" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/entity/Userentity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2890995">
+          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/HomeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89221555">
-          <caret line="64" column="38" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="125" column="22" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/RegisterService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4265403">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -41,4 +41,30 @@ public class UserDao {
             return results.get(0);
         }
     }
+
+    public Userentity findUserByNickname(String nickname) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Userentity> c = cb.createQuery(Userentity.class);
+        Root<Userentity> user = c.from(Userentity.class);
+        c.select(user);
+        ParameterExpression<String> p = cb.parameter(String.class);
+        c.where(cb.equal(user.get("nickname"), p));
+
+        TypedQuery<Userentity> query = em.createQuery(c);
+        query.setParameter(p, nickname);
+
+        List<Userentity> results = query.getResultList();
+
+        if (results.isEmpty()) {
+            return null;
+        } else {
+            return results.get(0);
+        }
+    }
+
+    public boolean createUser(String regTime, String email, String nickname, String password) {
+        Userentity user = new Userentity(regTime, email, password, nickname);
+        em.persist(user);
+        return true;
+    }
 }

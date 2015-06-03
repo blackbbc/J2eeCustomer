@@ -21,6 +21,18 @@ public class Userentity {
     private String name;
     private String path;
 
+    public Userentity() {}
+
+    public Userentity( String regTime, String email, String password, String nickname) {
+        this.regTime = regTime;
+        this.status = "1";
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.gender = "B";
+        this.path = "http://localhost:12450/images/default.jpeg";
+    }
+
     @Id
     @Column(name = "user_id", nullable = false, insertable = true, updatable = true)
     public int getUserId() {
