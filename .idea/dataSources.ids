@@ -21,6 +21,16 @@
       <column name="name" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
       <column name="path" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="user_id"/>
+      <exported-key name="verify_email_ibfk_1" table="verify_email" schema="" catalog="j2ee" columns="email"/>
+      <index name="email" unique="true" columns="email"/>
+      <index name="email_2" unique="false" columns="email"/>
+    </table>
+    <table name="verify_email" schema="" catalog="j2ee" type="TABLE">
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="token" sqlType="CHAR" precision="32" scale="0" nullable="false" jdbcType="1"/>
+      <column name="expire" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="email"/>
+      <foreign-key name="verify_email_ibfk_1" columns="email" ref-table="user" ref-schema="" ref-catalog="j2ee" ref-columns="email" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
   </data-source>
 </component>

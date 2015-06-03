@@ -1,5 +1,7 @@
 package jsonObject;
 
+import entity.Userentity;
+
 /**
  * Created by sweet on 15-6-2.
  */
@@ -17,6 +19,24 @@ public class LoginInfo {
     String name = "";
     String path;
     String sigature = "";
+
+    public LoginInfo(Userentity user) {
+        //必需的
+        this.reg_time = user.getRegTime();
+        this.status = user.getStatus();
+        this.user_id = user.getUserId();
+        this.email = user.getEmail();
+        this.nickname = user.getNickname();
+        this.path = user.getPath();
+        //可选的
+        this.telephone = user.getTelephone() == null? "00000000000": user.getTelephone();
+        this.school_id = user.getSchoolId() == null? "000000": user.getSchoolId();
+        this.birthday = user.getSchoolId() == null? "0": user.getBirthday();
+        this.gender = user.getGender() == null? "B": user.getGender();
+        this.alipay = "";
+        this.name = user.getName() == null? "": user.getName();
+        this.sigature = "";
+    }
 
     public LoginInfo(String reg_time, int user_id, String email, String nickname, String path) {
         this.reg_time = reg_time;
