@@ -1,18 +1,17 @@
 package jsonObject;
 
-import org.codehaus.jackson.map.annotate.JsonView;
-
 /**
- * Created by sweet on 15-6-2.
+ * Created by sweet on 15-6-3.
  */
-public class User {
-
+public class Car {
     int Code;
     String Msg;
+    GoodsInfo info;
 
-    public User(int code, String msg) {
+    public Car(int code, String msg, GoodsInfo info) {
         Code = code;
         Msg = msg;
+        this.info = info;
     }
 
     public int getCode() {
@@ -29,5 +28,13 @@ public class User {
 
     public void setMsg(String msg) {
         Msg = msg;
+    }
+
+    public GoodsInfo getInfo() {
+        return info;
+    }
+
+    public void setInfo(GoodsInfo info) {
+        this.info = info;
     }
 }
