@@ -6,12 +6,12 @@ package jsonObject;
 public class Car {
     int Code;
     String Msg;
-    GoodsInfo info;
+    GoodsInfo Info;
 
     public Car(int code, String msg, GoodsInfo info) {
         Code = code;
         Msg = msg;
-        this.info = info;
+        Info = info;
     }
 
     public int getCode() {
@@ -31,10 +31,10 @@ public class Car {
     }
 
     public GoodsInfo getInfo() {
-        return info;
+        return Info;
     }
 
     public void setInfo(GoodsInfo info) {
-        this.info = info;
+        Info = info;
     }
 }
