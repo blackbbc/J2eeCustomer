@@ -110,16 +110,4 @@ public class HomeController {
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/getImage", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<byte[]> getImage() throws IOException{
-        InputStream inputStream = new FileInputStream("/home/sweet/IdeaProjects/J2ee/src/main/resources/images/default.jpg");
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        headers.add("Access-Control-Allow-Origin", "*");
-
-        return new ResponseEntity<byte[]>(IOUtils.toByteArray(inputStream), headers, HttpStatus.CREATED);
-    }
-
 }
