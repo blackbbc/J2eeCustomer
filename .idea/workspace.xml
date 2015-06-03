@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="edb289b0-cd4e-40f8-8176-f79b34696a98" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/service/RegisterService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/HomeController.java" afterPath="$PROJECT_DIR$/src/main/java/controller/HomeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dao/UserDao.java" afterPath="$PROJECT_DIR$/src/main/java/dao/UserDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/entity/Userentity.java" afterPath="$PROJECT_DIR$/src/main/java/entity/Userentity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/J2ee-1.0-SNAPSHOT/WEB-INF/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/target/J2ee-1.0-SNAPSHOT/WEB-INF/dispatcher-servlet.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/J2ee-1.0-SNAPSHOT/WEB-INF/classes/controller/HomeController.class" afterPath="$PROJECT_DIR$/target/J2ee-1.0-SNAPSHOT/WEB-INF/classes/controller/HomeController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/controller/HomeController.class" afterPath="$PROJECT_DIR$/target/classes/controller/HomeController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/J2ee-1.0-SNAPSHOT/WEB-INF/classes/entity/Userentity.class" afterPath="$PROJECT_DIR$/target/J2ee-1.0-SNAPSHOT/WEB-INF/classes/entity/Userentity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/entity/Userentity.class" afterPath="$PROJECT_DIR$/target/classes/entity/Userentity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="J2ee.iws" />
@@ -58,8 +57,8 @@
       <file leaf-file-name="RegisterService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/service/RegisterService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4265403">
-              <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.22748815">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -738,7 +737,7 @@
       <workItem from="1433317109623" duration="931000" />
       <workItem from="1433327970490" duration="152000" />
       <workItem from="1433328164783" duration="9077000" />
-      <workItem from="1433343531998" duration="4740000" />
+      <workItem from="1433343531998" duration="6621000" />
     </task>
     <task id="LOCAL-00001" summary="Ready to zuo si">
       <created>1433301466771</created>
@@ -770,11 +769,17 @@
       <option name="project" value="LOCAL" />
       <updated>1433345915274</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Register">
+      <created>1433348640964</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1433348640964</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43715000" />
+    <option name="totallyTimeSpent" value="45596000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
@@ -829,7 +834,8 @@
     <MESSAGE value="zuo si wan bi" />
     <MESSAGE value="LoginFunction" />
     <MESSAGE value="Avatar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avatar" />
+    <MESSAGE value="Register" />
+    <option name="LAST_COMMIT_MESSAGE" value="Register" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1230,8 +1236,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/service/RegisterService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4265403">
-          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.22748815">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
