@@ -12,7 +12,6 @@ public class VerifyEmailentity {
     private String email;
     private String token;
     private String expire;
-    private Collection<Userentity> userByEmail;
 
     public VerifyEmailentity(){}
 
@@ -74,12 +73,4 @@ public class VerifyEmailentity {
         return result;
     }
 
-    @OneToMany
-    public Collection<Userentity> getUserByEmail() {
-        return userByEmail;
-    }
-
-    public void setUserByEmail(Collection<Userentity> userByEmail) {
-        this.userByEmail = userByEmail;
-    }
 }

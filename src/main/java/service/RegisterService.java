@@ -102,6 +102,8 @@ public class RegisterService {
     }
 
     public boolean activeUser(String email) {
-        return userDao.activeUser(email);
+        userDao.activeUser(email);
+        verifyEmailDao.removeVerifyEmailByEmail(email);
+        return true;
     }
 }

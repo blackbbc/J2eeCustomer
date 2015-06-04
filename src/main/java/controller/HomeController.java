@@ -112,7 +112,9 @@ public class HomeController {
         Userentity userentity = registerService.getUserByEmail(email);
         String myToken = userentity.getRegTime() + userentity.getEmail() + userentity.getPassword();
         myToken = DigestUtils.md5DigestAsHex(myToken.getBytes());
-        if (verifyEmailentity == null) {
+        if (userentity.getStatus() == "2") {
+            model.addAttribute("result", "您已激活!");
+        } else if (verifyEmailentity == null) {
             model.addAttribute("result", "该记录不存在!");
         } else if (!token.equals(myToken)) {
             model.addAttribute("result", "该链接无效！请检查账户！");

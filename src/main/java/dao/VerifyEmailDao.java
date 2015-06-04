@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -44,7 +45,14 @@ public class VerifyEmailDao {
 
     public boolean createVerifyEmail(String email, String token, String expire) {
         VerifyEmailentity verifyEmailentity = new VerifyEmailentity(email, token, expire);
-        em.persist(verifyEmailentity);
+        em.merge(verifyEmailentity);
+        return true;
+    }
+
+    public boolean removeVerifyEmailByEmail(String email) {
+        Query query = em.createQuery("delete from VerifyEmailentity vr where vr.email = :email");
+        query.setParameter("email", email);
+        query.executeUpdate();
         return true;
     }
 
