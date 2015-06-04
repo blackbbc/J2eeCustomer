@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -60,6 +61,15 @@ public class UserDao {
         } else {
             return results.get(0);
         }
+    }
+
+    public boolean activeUser(String email) {
+        Query query = em.createQuery("UPDATE Userentity ur SET ur.status = '2' where ur.email = :email");
+        query.setParameter("email", email);
+
+        int updateCount = query.executeUpdate();
+
+        return true;
     }
 
     public boolean createUser(String regTime, String email, String nickname, String password) {

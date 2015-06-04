@@ -1,6 +1,7 @@
 package controller;
 
 import entity.Userentity;
+import entity.VerifyEmailentity;
 import jsonObject.LoginInfo;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -102,6 +104,23 @@ public class HomeController {
         headers.add("Access-Control-Allow-Origin", "*");
 
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/UserActive.json", method = RequestMethod.GET)
+    public String active(Model model, @RequestParam(value = "email") String email, @RequestParam(value = "token") String token) {
+        VerifyEmailentity verifyEmailentity = registerService.getVerifyEmailByEmail(email);
+        Userentity userentity = registerService.getUserByEmail(email);
+        String myToken = userentity.getRegTime() + userentity.getEmail() + userentity.getPassword();
+        myToken = DigestUtils.md5DigestAsHex(myToken.getBytes());
+        if (verifyEmailentity == null) {
+            model.addAttribute("result", "该记录不存在!");
+        } else if (!token.equals(myToken)) {
+            model.addAttribute("result", "该链接无效！请检查账户！");
+        } else {
+            registerService.activeUser(email);
+            model.addAttribute("result", "激活成功！");
+        }
+        return "active";
     }
 
     @RequestMapping(value = "/Car.json", method = RequestMethod.GET)

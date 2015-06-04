@@ -14,6 +14,14 @@ public class VerifyEmailentity {
     private String expire;
     private Collection<Userentity> userByEmail;
 
+    public VerifyEmailentity(){}
+
+    public VerifyEmailentity(String email, String token, String expire) {
+        this.email = email;
+        this.token = token;
+        this.expire = expire;
+    }
+
     @Id
     @Column(name = "email", nullable = false, insertable = true, updatable = true, length = 255)
     public String getEmail() {
