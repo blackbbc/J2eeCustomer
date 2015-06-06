@@ -1,31 +1,61 @@
 package jsonObject;
 
+import com.google.gson.Gson;
+import entity.Goodsentity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by sweet on 15-6-3.
  */
 public class GoodsInfo {
     String goods_id;
     String type_id;
-    String status;
-    String user_id;
+    String start_time;
     String name;
+    String quality;
+    String sold_num;
+    String book_num;
     String t_limit;
     String price;
-    int quality;
+    String status;
+    String user_id;
     String nickname;
-    String path;
+    String signature;
+    String upath;
+    String detail;
+    int token_off;
+    ArrayList<HashMap<String, String>> img;
 
-    public GoodsInfo(String goods_id, String type_id, String status, String user_id, String name, String t_limit, String price, int quality, String nickname, String path) {
-        this.goods_id = goods_id;
-        this.type_id = type_id;
-        this.status = status;
-        this.user_id = user_id;
-        this.name = name;
-        this.t_limit = t_limit;
-        this.price = price;
-        this.quality = quality;
-        this.nickname = nickname;
-        this.path = path;
+    public GoodsInfo(Goodsentity goodsentity) {
+        Gson gson = new Gson();
+
+        this.goods_id = "" + goodsentity.getGoodsId();
+        this.type_id = goodsentity.getTypeId();
+        this.start_time = goodsentity.getStartTime();
+        this.name = goodsentity.getName();
+        this.quality = "" + goodsentity.getQuality();
+        this.sold_num = "" + goodsentity.getSoldNum();
+        this.book_num = "" + goodsentity.getBookNum();
+        this.t_limit = goodsentity.gettLimit();
+        this.price = String.format("%.2f", goodsentity.getPrice());
+        this.status = goodsentity.getStatus();
+        this.user_id = "" + goodsentity.getUserId();
+        this.nickname = goodsentity.getNickname();
+        this.signature = goodsentity.getSignature();
+        this.upath = goodsentity.getUpath();
+        this.detail = goodsentity.getDetail();
+        this.token_off = goodsentity.getTokenOff();
+
+        ArrayList<String> arr = gson.fromJson(goodsentity.getImg(), ArrayList.class);
+        this.img = new ArrayList<HashMap<String, String>>();
+
+        for (String path:arr) {
+            HashMap<String, String> entry = new HashMap<String, String>();
+            entry.put("path", path);
+            this.img.add(entry);
+        }
     }
 
     public String getGoods_id() {
@@ -44,20 +74,12 @@ public class GoodsInfo {
         this.type_id = type_id;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStart_time() {
+        return start_time;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
     }
 
     public String getName() {
@@ -66,6 +88,30 @@ public class GoodsInfo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getQuality() {
+        return quality;
+    }
+
+    public void setQuality(String quality) {
+        this.quality = quality;
+    }
+
+    public String getSold_num() {
+        return sold_num;
+    }
+
+    public void setSold_num(String sold_num) {
+        this.sold_num = sold_num;
+    }
+
+    public String getBook_num() {
+        return book_num;
+    }
+
+    public void setBook_num(String book_num) {
+        this.book_num = book_num;
     }
 
     public String getT_limit() {
@@ -84,12 +130,20 @@ public class GoodsInfo {
         this.price = price;
     }
 
-    public int getQuality() {
-        return quality;
+    public String getStatus() {
+        return status;
     }
 
-    public void setQuality(int quality) {
-        this.quality = quality;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getNickname() {
@@ -100,11 +154,43 @@ public class GoodsInfo {
         this.nickname = nickname;
     }
 
-    public String getPath() {
-        return path;
+    public String getSignature() {
+        return signature;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getUpath() {
+        return upath;
+    }
+
+    public void setUpath(String upath) {
+        this.upath = upath;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public int getToken_off() {
+        return token_off;
+    }
+
+    public void setToken_off(int token_off) {
+        this.token_off = token_off;
+    }
+
+    public ArrayList<HashMap<String, String>> getImg() {
+        return img;
+    }
+
+    public void setImg(ArrayList<HashMap<String, String>> img) {
+        this.img = img;
     }
 }

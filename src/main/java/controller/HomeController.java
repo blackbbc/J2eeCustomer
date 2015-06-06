@@ -1,7 +1,10 @@
 package controller;
 
+import entity.Goodsentity;
 import entity.Userentity;
 import entity.VerifyEmailentity;
+import jsonObject.GoodsInfo;
+import jsonObject.LatestInfo;
 import jsonObject.LoginInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -14,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import service.GoodsService;
 import service.LoginService;
 import service.RegisterService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,6 +38,9 @@ public class HomeController {
 
     @Autowired
     private RegisterService registerService;
+
+    @Autowired
+    private GoodsService goodsService;
 
     @RequestMapping(value = "/User.json", method = RequestMethod.POST)
     @ResponseBody
@@ -126,6 +135,48 @@ public class HomeController {
         result.put("Code", 0);
         result.put("Msg", "操作成功");
         result.put("Info", null);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "*");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/Goods.json", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getGoods(
+            @RequestParam(value = "goods_id") String goods_id) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        int id = Integer.parseInt(goods_id);
+        Goodsentity goodsentity = goodsService.getGoodsById(id);
+        GoodsInfo goodsInfo = new GoodsInfo(goodsentity);
+
+        result.put("Code", 0);
+        result.put("Msg", "操作成功");
+        result.put("Info", goodsInfo);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "*");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/Latest.json", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getLatest() {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        List<LatestInfo> info = new ArrayList<LatestInfo>();
+        List<Goodsentity> latest = goodsService.getLatestGoods();
+
+        for (Goodsentity entry:latest) {
+            info.add(new LatestInfo(entry));
+        }
+
+        result.put("Code", 0);
+        result.put("Msg", "操作成功");
+        result.put("Info", info);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Access-Control-Allow-Origin", "*");

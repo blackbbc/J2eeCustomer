@@ -4,6 +4,7 @@
     <persistence-unit name="j2ee">
         <class>entity.Userentity</class>
         <class>entity.VerifyEmailentity</class>
+        <class>entity.Goodsentity</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/j2ee"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

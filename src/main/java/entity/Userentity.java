@@ -74,7 +74,7 @@ public class Userentity {
     }
 
     @Basic
-    @Column(name = "email", nullable = true, insertable = true, updatable = true, length = 320)
+    @Column(name = "email", nullable = false, insertable = true, updatable = true, length = 320)
     public String getEmail() {
         return email;
     }
