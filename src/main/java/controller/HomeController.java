@@ -3,11 +3,9 @@ package controller;
 import entity.Userentity;
 import entity.VerifyEmailentity;
 import jsonObject.LoginInfo;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import service.LoginService;
 import service.RegisterService;
 
-import javax.servlet.ServletContext;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
