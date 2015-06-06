@@ -8,9 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,5 +42,21 @@ public class GoodsDao {
         } else {
             return results;
         }
+    }
+
+    public List<Goodsentity> findGoods(String keyWord, String type_id, int page) {
+        TypedQuery<Goodsentity> query;
+        if (type_id.equals("000000")) {
+            query = em.createQuery("select g from Goodsentity g where g.name like :name", Goodsentity.class);
+            query.setParameter("name", "%"+keyWord+"%");
+        } else {
+            query = em.createQuery("select g from Goodsentity g where g.typeId = :typeid and g.name like :name", Goodsentity.class);
+            query.setParameter("typeid", type_id);
+            query.setParameter("name", "%"+keyWord+"%");
+        }
+
+        List<Goodsentity> results = query.getResultList();
+
+            return results;
     }
 }

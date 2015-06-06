@@ -28,4 +28,8 @@ public class GoodsService {
     List<Goodsentity> getLatestGoods() {
         return goodsDao.findLatestGoods();
     }
+
+    public List<Goodsentity> getGoods(String keyWord, String typeId, String page) {
+        return goodsDao.findGoods(keyWord, typeId, Integer.parseInt(page));
+    }
 }

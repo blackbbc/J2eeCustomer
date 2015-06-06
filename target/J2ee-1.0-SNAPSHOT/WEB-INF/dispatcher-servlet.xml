@@ -12,8 +12,10 @@
 
     <mvc:annotation-driven />
     <mvc:resources mapping="/images/**" location="/images/" />
-    <mvc:resources mapping="/uploads/goods/**" location="/images/uploads/goods/" />
-    <mvc:resources mapping="/uploads/users/**" location="/images/uploads/users/" />
+    <mvc:resources mapping="/Uploads/goods/**" location="/images/uploads/goods/" />
+    <mvc:resources mapping="/Uploads/users/**" location="/images/uploads/users/" />
+    <mvc:resources mapping="/Uploads/Thumb/goods/**" location="/images/uploads/goods/" />
+    <mvc:resources mapping="/Uploads/Thumb/users/**" location="/images/uploads/users/" />
     <context:component-scan base-package="controller" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

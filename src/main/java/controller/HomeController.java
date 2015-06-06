@@ -184,6 +184,30 @@ public class HomeController {
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/Search.json", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> search(
+            @RequestParam(value = "keyWord") String keyWord,
+            @RequestParam(value = "type_id") String type_id,
+            @RequestParam(value = "page") String page) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        List<LatestInfo> info = new ArrayList<LatestInfo>();
+        List<Goodsentity> list = goodsService.getGoods(keyWord, type_id, page);
+        for (Goodsentity item:list) {
+            info.add(new LatestInfo(item));
+        }
+
+        result.put("Code", 0);
+        result.put("Msg", "操作成功");
+        result.put("Info", info);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "*");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/Test.json", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getTest(@RequestParam(value = "test", required = false) String test) {
