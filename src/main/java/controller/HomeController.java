@@ -142,6 +142,44 @@ public class HomeController {
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/CarAdd.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> carAdd(
+            @RequestParam(value = "goods_id") int goods_id,
+            @RequestParam(value = "number") int number) {
+
+        Map<String, Object> result = new HashMap<String, Object>();
+        Goodsentity goodsentity = goodsService.getGoodsById(goods_id);
+        goodsentity.setQuality(number);
+        GoodsInfo goodsInfo = new GoodsInfo(goodsentity);
+
+        result.put("Code", 0);
+        result.put("Msg", "操作成功");
+        result.put("Info", goodsInfo);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "*");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/CarRemove.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> carAdd(
+            @RequestParam(value = "goods_id") int goods_id) {
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        result.put("Code", 0);
+        result.put("Msg", "操作成功");
+        result.put("Info", 1);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "*");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/Goods.json", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getGoods(
