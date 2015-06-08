@@ -58,14 +58,18 @@ public class GoodsDao {
             query.setParameter("name", "%"+keyWord+"%");
         }
 
+        query.setFirstResult(18*(page-1));
+        query.setMaxResults(18);
+
         List<Goodsentity> results = query.getResultList();
 
-            return results;
+        return results;
     }
 
-    public int createAppGoods(HashMap<String, String> info, Userentity userentity) {
-        Goodsentity goodsentity = new Goodsentity(info, userentity);
+    public int createAppGoods(Goodsentity goodsentity) {
         em.persist(goodsentity);
+        em.flush();
+
         return goodsentity.getGoodsId();
     }
 }

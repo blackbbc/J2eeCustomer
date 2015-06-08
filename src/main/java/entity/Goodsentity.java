@@ -51,6 +51,7 @@ public class Goodsentity {
 
     @Id
     @Column(name = "goods_id", nullable = false, insertable = true, updatable = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getGoodsId() {
         return goodsId;
     }

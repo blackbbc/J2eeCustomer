@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import dao.ApplicationDao;
 import dao.GoodsDao;
 import dao.UserDao;
+import entity.Goodsentity;
 import entity.Userentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,14 +34,15 @@ public class ApplicationService {
         Userentity userentity = userDao.findUserById(user_id);
 
         for (HashMap<String, String> info:infos) {
-            int goods_id = goodsDao.createAppGoods(info, userentity);
+            Goodsentity goodsentity = new Goodsentity(info, userentity);
+            int goods_id = goodsDao.createAppGoods(goodsentity);
             goodsArr.add(goods_id);
         }
 
         Gson gson = new Gson();
         String goodsId = gson.toJson(goodsArr);
 
-//        applicationDao.createApplication(user_id, b_NO, NO, goodsId);
+        applicationDao.createApplication(user_id, b_NO, NO, goodsId);
 
         return true;
     }
