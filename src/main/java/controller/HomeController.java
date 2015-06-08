@@ -271,15 +271,24 @@ public class HomeController {
     @RequestMapping(value = "/Test.json", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getTest(@RequestParam(value = "test", required = false) String test) {
-
-        String pass = "admin";
-        String token = DigestUtils.md5DigestAsHex(pass.getBytes());
-
         Map<String, Object> result = new HashMap();
+
+        HashMap<String, String> detail = new HashMap<String, String>();
+        ArrayList<Object> details = new ArrayList<Object>();
+        HashMap<String, Object> info = new HashMap<String, Object>();
+        ArrayList<Object> infos = new ArrayList<Object>();
+
+        detail.put("detail", "test");
+        detail.put("name", "test1");
+        details.add(detail);
+        info.put("app_id", "171");
+        info.put("b_no", "test");
+        info.put("detail", details);
+        infos.add(info);
+
         result.put("Code", 0);
         result.put("Msg", "操作成功");
-        result.put("test", test);
-        result.put("token", token);
+        result.put("Info", infos);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Access-Control-Allow-Origin", "*");

@@ -74,6 +74,26 @@ public class ManagerController {
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/Application.json", method = RequestMethod.GET)
+    @ResponseBody
+    public  ResponseEntity<Map<String, Object>> getApply(
+            @RequestParam(value = "status") String status,
+            @RequestParam(value = "start") int start,
+            @RequestParam(value = "count") int count,
+            @CookieValue(value = "loginUid") String loginUid) {
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
+
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/Application.json", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> apply(
