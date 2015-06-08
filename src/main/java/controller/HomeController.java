@@ -21,6 +21,7 @@ import service.GoodsService;
 import service.LoginService;
 import service.RegisterService;
 
+import javax.servlet.http.Cookie;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,6 +83,7 @@ public class HomeController {
             @RequestParam(value = "email") String email,
             @RequestParam(value = "password") String password) {
         Map<String, Object> result = new HashMap();
+        HttpHeaders headers = new HttpHeaders();
         Userentity user = loginService.getUserByEmail(email);
 
         if (user == null) {
@@ -98,13 +100,33 @@ public class HomeController {
             result.put("Info", null);
         } else {
             LoginInfo info = new LoginInfo(user);
+            String loginUid = "" + user.getUserId();
+            String loginKey = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
+            headers.add("Set-Cookie", "loginUid="+loginUid+"; expires=Sun, 20-Jun-2016 10:42:28 GMT; path=/");
+            headers.add("Set-Cookie", "loginKey="+loginKey+"; expires=Sun, 20-Jun-2016 10:42:28 GMT; path=/");
+//            headers.add("Set-Cookie", "loginKey=2235a3b4f6413566b89c83d95fb3429b; expires=Sun, 20-Jun-2015 10:42:28 GMT; path=/");
             result.put("Code", 0);
             result.put("Msg", "操作成功");
             result.put("Info", info);
         }
 
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/Logout.json", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> logout() {
+        Map<String, Object> result = new HashMap();
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin", "*");
+
+        headers.add("Set-Cookie", "loginUid=; expires=Sun, 20-Jun-2014 10:42:28 GMT; path=/");
+        headers.add("Set-Cookie", "loginKey=; expires=Sun, 20-Jun-2014 10:42:28 GMT; path=/");
+
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
 
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }

@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.HashMap;
 
 /**
  * Created by sweet on 15-6-6.
@@ -25,6 +26,31 @@ public class Goodsentity {
     private String detail;
     private String img;
     private int tokenOff;
+
+    public Goodsentity(){}
+
+    public Goodsentity(HashMap<String, String> info, Userentity userentity) {
+        this.userId = userentity.getUserId();
+        Long currentTime = System.currentTimeMillis() / 1000L;
+        Long lastTime = Long.parseLong(info.get("t_limit"));
+        Long untilTime = currentTime + lastTime * 2592000;
+        this.startTime = "" + currentTime;
+        this.name = info.get("name");
+
+        System.out.println(this.name);
+
+        this.quality = Integer.parseInt(info.get("num"));
+        this.soldNum = 0;
+        this.bookNum = 0;
+        this.tLimit = "" + untilTime;
+        this.price = Float.parseFloat(info.get("price"));
+        this.status = "1";
+        this.detail = info.get("detail");
+        this.tokenOff = 0;
+        this.nickname = userentity.getNickname();
+        this.signature = userentity.getSignature();
+        this.upath = userentity.getPath();
+    }
 
     @Id
     @Column(name = "goods_id", nullable = false, insertable = true, updatable = true)
@@ -177,7 +203,7 @@ public class Goodsentity {
     }
 
     @Basic
-    @Column(name = "img", nullable = false, insertable = true, updatable = true, length = 65535)
+    @Column(name = "img", nullable = true, insertable = true, updatable = true, length = 65535)
     public String getImg() {
         return img;
     }

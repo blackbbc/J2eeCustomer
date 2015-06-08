@@ -20,6 +20,7 @@ public class Userentity {
     private String gender;
     private String name;
     private String path;
+    private String signature;
 
     public Userentity() {}
 
@@ -30,6 +31,7 @@ public class Userentity {
         this.password = password;
         this.nickname = nickname;
         this.gender = "B";
+        this.signature = "";
         this.path = "http://localhost:12450/images/default.jpeg";
     }
 
@@ -191,5 +193,15 @@ public class Userentity {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (path != null ? path.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "signature", nullable = false, insertable = true, updatable = true, length = 65535)
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 }

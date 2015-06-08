@@ -23,6 +23,10 @@ public class UserDao {
     @PersistenceContext
     void setEm(EntityManager entityManager) { this.em = entityManager; }
 
+    public Userentity findUserById(int userId) {
+        return em.find(Userentity.class, userId);
+    }
+
     public Userentity findUserByEmail(String email) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Userentity> c = cb.createQuery(Userentity.class);

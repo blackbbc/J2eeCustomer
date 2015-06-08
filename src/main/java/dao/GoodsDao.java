@@ -1,6 +1,7 @@
 package dao;
 
 import entity.Goodsentity;
+import entity.Userentity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -58,5 +60,11 @@ public class GoodsDao {
         List<Goodsentity> results = query.getResultList();
 
             return results;
+    }
+
+    public int createAppGoods(HashMap<String, String> info, Userentity userentity) {
+        Goodsentity goodsentity = new Goodsentity(info, userentity);
+        em.persist(goodsentity);
+        return goodsentity.getGoodsId();
     }
 }
