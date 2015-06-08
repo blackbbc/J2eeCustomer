@@ -32,6 +32,7 @@ public class GoodsDao {
         CriteriaQuery<Goodsentity> c = cb.createQuery(Goodsentity.class);
         Root<Goodsentity> goods = c.from(Goodsentity.class);
         c.select(goods);
+        c.where(cb.equal(goods.get("status"), "2"));
         c.orderBy(cb.desc(goods.get("startTime")));
 
         TypedQuery<Goodsentity> query = em.createQuery(c);
@@ -49,10 +50,10 @@ public class GoodsDao {
     public List<Goodsentity> findGoods(String keyWord, String type_id, int page) {
         TypedQuery<Goodsentity> query;
         if (type_id.equals("000000")) {
-            query = em.createQuery("select g from Goodsentity g where g.name like :name", Goodsentity.class);
+            query = em.createQuery("select g from Goodsentity g where g.status = '2' and g.name like :name", Goodsentity.class);
             query.setParameter("name", "%"+keyWord+"%");
         } else {
-            query = em.createQuery("select g from Goodsentity g where g.typeId = :typeid and g.name like :name", Goodsentity.class);
+            query = em.createQuery("select g from Goodsentity g where g.status = '2' and g.typeId = :typeid and g.name like :name", Goodsentity.class);
             query.setParameter("typeid", type_id);
             query.setParameter("name", "%"+keyWord+"%");
         }

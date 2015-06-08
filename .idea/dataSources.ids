@@ -21,7 +21,7 @@
     <table name="goods" schema="" catalog="j2ee" type="TABLE">
       <column name="goods_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="type_id" sqlType="CHAR" precision="6" scale="0" nullable="false" jdbcType="1"/>
+      <column name="type_id" sqlType="CHAR" precision="6" scale="0" nullable="true" jdbcType="1"/>
       <column name="start_time" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
       <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="quality" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
@@ -56,6 +56,7 @@
       <exported-key name="verify_email_ibfk_1" table="verify_email" schema="" catalog="j2ee" columns="email"/>
       <index name="email" unique="true" columns="email"/>
       <index name="email_2" unique="false" columns="email"/>
+      <index name="email_3" unique="false" columns="email"/>
     </table>
     <table name="verify_email" schema="" catalog="j2ee" type="TABLE">
       <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>

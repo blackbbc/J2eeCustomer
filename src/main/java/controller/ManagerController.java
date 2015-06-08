@@ -13,7 +13,6 @@ import service.ApplicationService;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -87,13 +86,9 @@ public class ManagerController {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType();
 
-        System.out.println(info);
-
         ArrayList<HashMap<String, String>> infos = gson.fromJson(info, type);
 
-        System.out.println(infos.get(0).get("name"));
-
-//        applicationService.createApplication(loginUid, b_NO, NO, infos);
+        applicationService.createApplication(loginUid, b_NO, NO, infos);
 
         result.put("Code", 0);
         result.put("Msg", "操作成功");

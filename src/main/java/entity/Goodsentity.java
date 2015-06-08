@@ -36,9 +36,6 @@ public class Goodsentity {
         Long untilTime = currentTime + lastTime * 2592000;
         this.startTime = "" + currentTime;
         this.name = info.get("name");
-
-        System.out.println(this.name);
-
         this.quality = Integer.parseInt(info.get("num"));
         this.soldNum = 0;
         this.bookNum = 0;
@@ -73,7 +70,7 @@ public class Goodsentity {
     }
 
     @Basic
-    @Column(name = "type_id", nullable = false, insertable = true, updatable = true, length = 6)
+    @Column(name = "type_id", nullable = true, insertable = true, updatable = true, length = 6)
     public String getTypeId() {
         return typeId;
     }
