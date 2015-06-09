@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import dao.ApplicationDao;
 import dao.GoodsDao;
 import dao.UserDao;
+import entity.Applicationentity;
 import entity.Goodsentity;
 import entity.Userentity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by sweet on 15-6-7.
@@ -45,6 +47,10 @@ public class ApplicationService {
         applicationDao.createApplication(user_id, b_NO, NO, goodsId);
 
         return true;
+    }
+
+    public List<Applicationentity> getApps(int userId, String status, int start, int count) {
+        return applicationDao.getApps(userId, status, start, count);
     }
 
 

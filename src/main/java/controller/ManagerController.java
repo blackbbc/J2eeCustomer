@@ -2,6 +2,10 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import dao.GoodsDao;
+import entity.Applicationentity;
+import entity.Goodsentity;
+import jsonObject.AppInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,6 +17,7 @@ import service.ApplicationService;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +29,9 @@ public class ManagerController {
 
     @Autowired
     private ApplicationService applicationService;
+
+    @Autowired
+    private GoodsDao goodsDao;
 
     @RequestMapping(value = "/UserData.json", method = RequestMethod.POST)
     @ResponseBody
@@ -82,10 +90,39 @@ public class ManagerController {
             @RequestParam(value = "count") int count,
             @CookieValue(value = "loginUid") String loginUid) {
 
+        Gson gson = new Gson();
+
         Map<String, Object> result = new HashMap<String, Object>();
 
+        ArrayList<Object> infos = new ArrayList<Object>();
 
+        int userId = Integer.parseInt(loginUid);
+        List<Applicationentity> apps = applicationService.getApps(userId, status, start, count);
 
+        for (Applicationentity app:apps) {
+            HashMap<String, Object> info = new HashMap<String, Object>();
+            ArrayList<Double> goods_id = gson.fromJson(app.getGoodsId(), ArrayList.class);
+            ArrayList<Object> details = new ArrayList<Object>();
+            for (Double good_id:goods_id) {
+                Goodsentity good = goodsDao.findGoodsById(good_id.intValue());
+                AppInfo appInfo = new AppInfo(good);
+                details.add(appInfo);
+            }
+            info.put("app_id", ""+app.getAppId());
+            info.put("b_NO", app.getbNo());
+            info.put("NO", app.getNo());
+            info.put("reason", app.getReason());
+            info.put("status", app.getStatus());
+            info.put("time", app.getTime());
+            info.put("user_id", "" + userId);
+            info.put("detail", details);
+
+            infos.add(info);
+        }
+
+        result.put("Code", 0);
+        result.put("Msg", "操作成功");
+        result.put("Info", infos);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Access-Control-Allow-Credentials", "true");
