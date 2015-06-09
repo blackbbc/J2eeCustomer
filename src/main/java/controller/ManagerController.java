@@ -6,12 +6,14 @@ import dao.GoodsDao;
 import entity.Applicationentity;
 import entity.Goodsentity;
 import jsonObject.AppInfo;
+import jsonObject.GoodsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import service.ApplicationService;
 
 import java.lang.reflect.Type;
@@ -49,6 +51,24 @@ public class ManagerController {
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/ImgModify.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> imgModify(
+            @RequestParam(value = "imgData") MultipartFile imgData,
+            @CookieValue(value = "loginUid") int loginUid) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+
+        result.put("Code", 0);
+        result.put("Msg", "操作成功");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/PSModify.json", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> psModify(
@@ -82,6 +102,34 @@ public class ManagerController {
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "Goods", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getGoods(
+            @RequestParam(value = "type") String type,
+            @RequestParam(value = "status") String status,
+            @RequestParam(value = "start") int start,
+            @RequestParam(value = "count") int count,
+            @CookieValue(value = "loginUid") int loginUid) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        Goodsentity good1 = goodsDao.findGoodsById(1);
+        Goodsentity good2 = goodsDao.findGoodsById(1);
+
+        ArrayList<GoodsInfo> goods = new ArrayList<GoodsInfo>();
+        goods.add(new GoodsInfo(good1));
+        goods.add(new GoodsInfo(good2));
+
+        result.put("Code", 0);
+        result.put("Msg", "操作成功");
+        result.put("Info", goods);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/Application.json", method = RequestMethod.GET)
     @ResponseBody
     public  ResponseEntity<Map<String, Object>> getApply(
@@ -109,8 +157,8 @@ public class ManagerController {
                 details.add(appInfo);
             }
             info.put("app_id", ""+app.getAppId());
-            info.put("b_NO", app.getbNo());
-            info.put("NO", app.getNo());
+            info.put("b_no", app.getbNo());
+            info.put("no", app.getNo());
             info.put("reason", app.getReason());
             info.put("status", app.getStatus());
             info.put("time", app.getTime());

@@ -3,6 +3,8 @@ package jsonObject;
 import entity.Applicationentity;
 import entity.Goodsentity;
 
+import java.util.Random;
+
 /**
  * Created by sweet on 15-6-9.
  */
@@ -21,7 +23,7 @@ public class AppInfo {
         this.name = goodsentity.getName();
         this.num = "" + goodsentity.getQuality();
         this.price = String.format("%2f", goodsentity.getPrice());
-        this.process_id = "1";
+        this.process_id = "1"+ new Random().nextInt();
         this.status = goodsentity.getStatus();
         this.t_limit = goodsentity.gettLimit();
         this.time = goodsentity.getStartTime();
