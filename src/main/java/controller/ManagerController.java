@@ -3,6 +3,7 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import dao.GoodsDao;
+import dao.UserDao;
 import entity.Applicationentity;
 import entity.Goodsentity;
 import jsonObject.AppInfo;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import service.ApplicationService;
+import service.GoodsService;
+import service.UserService;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +43,10 @@ public class ManagerController {
     private ApplicationService applicationService;
 
     @Autowired
-    private GoodsDao goodsDao;
+    private UserService userService;
+
+    @Autowired
+    private GoodsService goodsService;
 
     @RequestMapping(value = "/UserData.json", method = RequestMethod.POST)
     @ResponseBody
@@ -80,6 +86,8 @@ public class ManagerController {
         String fileName = loginUid + ".png";
 
         saveAvatarImage(imgData, fileName);
+        userService.changeAvatar(loginUid, fileName);
+//        userService.changeAvatar(1, "8.png");
 
         result.put("Code", 0);
         result.put("Msg", "操作成功");
@@ -135,7 +143,7 @@ public class ManagerController {
             @CookieValue(value = "loginUid") int loginUid) {
         Map<String, Object> result = new HashMap<String, Object>();
 
-        List<Goodsentity> goods = goodsDao.findSellGoods(loginUid, type, status, start, count);
+        List<Goodsentity> goods = goodsService.getSellGoods(loginUid, type, status, start, count);
         ArrayList<GoodsInfo> goodsInfo = new ArrayList<GoodsInfo>();
         for (Goodsentity good:goods) {
             goodsInfo.add(new GoodsInfo(good));
@@ -174,7 +182,7 @@ public class ManagerController {
             ArrayList<Double> goods_id = gson.fromJson(app.getGoodsId(), ArrayList.class);
             ArrayList<Object> details = new ArrayList<Object>();
             for (Double good_id:goods_id) {
-                Goodsentity good = goodsDao.findGoodsById(good_id.intValue());
+                Goodsentity good = goodsService.getGoodsById(good_id.intValue());
                 AppInfo appInfo = new AppInfo(good);
                 details.add(appInfo);
             }

@@ -32,4 +32,8 @@ public class GoodsService {
     public List<Goodsentity> getGoods(String keyWord, String typeId, String page) {
         return goodsDao.findGoods(keyWord, typeId, Integer.parseInt(page));
     }
+
+    public List<Goodsentity> getSellGoods(int userId, String type, String status, int start, int count) {
+        return goodsDao.findSellGoods(userId, type, status, start, count);
+    }
 }
