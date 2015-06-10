@@ -6,6 +6,8 @@
         <class>entity.VerifyEmailentity</class>
         <class>entity.Goodsentity</class>
         <class>entity.Applicationentity</class>
+        <class>entity.Bookentity</class>
+        <class>entity.BookGoodsentity</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/j2ee?useUnicode=yes&amp;characterEncoding=UTF-8"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

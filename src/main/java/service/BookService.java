@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by sweet on 15-6-10.
@@ -51,6 +52,14 @@ public class BookService {
             }
         }
         return true;
+    }
+
+    public List<Bookentity> getBooks(int userId, String status, int start, int count) {
+        return bookDao.findBooks(userId, status, start, count);
+    }
+
+    public List<BookGoodsentity> getBookGoods(int bookId) {
+        return bookGoodsDao.findBookGoodsByBookId(bookId);
     }
 
 }

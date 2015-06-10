@@ -5,8 +5,11 @@ import com.google.gson.reflect.TypeToken;
 import dao.GoodsDao;
 import dao.UserDao;
 import entity.Applicationentity;
+import entity.BookGoodsentity;
+import entity.Bookentity;
 import entity.Goodsentity;
 import jsonObject.AppInfo;
+import jsonObject.BookGoodsInfo;
 import jsonObject.GoodsInfo;
 import jsonObject.LatestInfo;
 import org.apache.commons.codec.binary.Base64;
@@ -123,16 +126,14 @@ public class ManagerController {
     @RequestMapping(value = "/Book.json", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> book(
-            @RequestParam(value = "bookInfo") String bookInfo
-//            @CookieValue(value = "loginUid" ) int loginUid) {
-    ) {
+            @RequestParam(value = "bookInfo") String bookInfo,
+            @CookieValue(value = "loginUid" ) int loginUid) {
         Map<String, Object> result = new HashMap<String, Object>();
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<HashMap<String, Integer>>>(){}.getType();
         ArrayList<HashMap<String, Integer>> book = gson.fromJson(bookInfo, type);
 
-
-        if (bookService.book(8, book)) {
+        if (bookService.book(loginUid, book)) {
             result.put("Code", 0);
             result.put("Msg", "操作成功");
         } else {
@@ -140,6 +141,53 @@ public class ManagerController {
             result.put("Msg", "操作失败");
         }
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/BookDetail", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> bookDetail(
+            @RequestParam(value = "status") String status,
+            @RequestParam(value = "start") int start,
+            @RequestParam(value = "count") int count) {
+//            @CookieValue(value = "loginUid") int loginUid) {
+
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        ArrayList<Object> infos = new ArrayList<Object>();
+
+//        int userId = loginUid;
+        int userId = 8;
+        List<Bookentity> books = bookService.getBooks(userId, status, start, count);
+
+        for (Bookentity book:books) {
+            HashMap<String, Object> info = new HashMap<String, Object>();
+            List<BookGoodsentity> bookGoods = bookService.getBookGoods(book.getBookId());
+            List<BookGoodsInfo> details = new ArrayList<BookGoodsInfo>();
+            for (BookGoodsentity bookgood:bookGoods) {
+                details.add(new BookGoodsInfo(bookgood));
+            }
+            info.put("b_mid", ""+book.getbMid());
+            info.put("book_id", ""+book.getBookId());
+            info.put("delivery", book.getDelivery());
+            info.put("f_time", book.getfTime());
+            info.put("school_id", book.getBookId());
+            info.put("status", book.getStatus());
+            info.put("time", book.getTime());
+
+            info.put("detail", details);
+
+            infos.add(info);
+        }
+
+        result.put("Code", 0);
+        result.put("Msg", "操作成功");
+        result.put("Info", infos);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Access-Control-Allow-Credentials", "true");
@@ -147,6 +195,7 @@ public class ManagerController {
 
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
+
 
     @RequestMapping(value = "Goods", method = RequestMethod.GET)
     @ResponseBody
