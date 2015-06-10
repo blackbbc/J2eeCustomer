@@ -7,7 +7,9 @@ import entity.Applicationentity;
 import entity.Goodsentity;
 import jsonObject.AppInfo;
 import jsonObject.GoodsInfo;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import service.ApplicationService;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,16 +57,32 @@ public class ManagerController {
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
 
+    public static boolean saveAvatarImage(String imgData, String fileName) {
+        try {
+            byte[] imageDataBytes = Base64.decodeBase64(imgData);
+            FileOutputStream file = new FileOutputStream("/var/local/apache-tomcat-8.0.21/webapps/ROOT/images/uploads/users/"+fileName);
+            file.write(imageDataBytes);
+            file.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     @RequestMapping(value = "/ImgModify.json", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> imgModify(
-            @RequestParam(value = "imgData") MultipartFile imgData,
+            @RequestParam(value = "imgData") String imgData,
             @CookieValue(value = "loginUid") int loginUid) {
         Map<String, Object> result = new HashMap<String, Object>();
+        String fileName = loginUid + ".png";
 
+        saveAvatarImage(imgData, fileName);
 
         result.put("Code", 0);
         result.put("Msg", "操作成功");
+        result.put("Info","http://localhost:12450/Uploads/users/"+fileName);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Access-Control-Allow-Credentials", "true");
