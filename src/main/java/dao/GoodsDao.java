@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -85,6 +86,16 @@ public class GoodsDao {
         List<Goodsentity> results = query.getResultList();
 
         return results;
+    }
+
+    public boolean updateBookNum(int goodId, int num) {
+        Query query = em.createQuery("UPDATE Goodsentity good SET good.bookNum = good.bookNum + :num where good.goodsId = :goodId");
+        query.setParameter("num", num);
+        query.setParameter("goodId", goodId);
+
+        query.executeUpdate();
+
+        return true;
     }
 
     public int createAppGoods(Goodsentity goodsentity) {

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import service.ApplicationService;
+import service.BookService;
 import service.GoodsService;
 import service.UserService;
 
@@ -47,6 +48,9 @@ public class ManagerController {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private BookService bookService;
 
     @RequestMapping(value = "/UserData.json", method = RequestMethod.POST)
     @ResponseBody
@@ -87,7 +91,6 @@ public class ManagerController {
 
         saveAvatarImage(imgData, fileName);
         userService.changeAvatar(loginUid, fileName);
-//        userService.changeAvatar(1, "8.png");
 
         result.put("Code", 0);
         result.put("Msg", "操作成功");
@@ -119,16 +122,28 @@ public class ManagerController {
 
     @RequestMapping(value = "/Book.json", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> book(@RequestParam(value = "bookInfo") String bookInfo) {
+    public ResponseEntity<Map<String, Object>> book(
+            @RequestParam(value = "bookInfo") String bookInfo
+//            @CookieValue(value = "loginUid" ) int loginUid) {
+    ) {
         Map<String, Object> result = new HashMap<String, Object>();
         Gson gson = new Gson();
-        ArrayList<HashMap<String, Integer>> book = gson.fromJson(bookInfo, ArrayList.class);
+        Type type = new TypeToken<ArrayList<HashMap<String, Integer>>>(){}.getType();
+        ArrayList<HashMap<String, Integer>> book = gson.fromJson(bookInfo, type);
 
-        result.put("Code", 0);
-        result.put("Msg", "操作成功");
+
+        if (bookService.book(8, book)) {
+            result.put("Code", 0);
+            result.put("Msg", "操作成功");
+        } else {
+            result.put("Code", 1007);
+            result.put("Msg", "操作失败");
+        }
+
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin", "*");
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
 
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }

@@ -68,7 +68,7 @@ public class Userentity {
     @Basic
     @Column(name = "telephone", nullable = true, insertable = true, updatable = true, length = 20)
     public String getTelephone() {
-        return telephone;
+        return telephone == null? "00000000000": telephone;
     }
 
     public void setTelephone(String telephone) {
@@ -108,7 +108,7 @@ public class Userentity {
     @Basic
     @Column(name = "school_id", nullable = true, insertable = true, updatable = true, length = 20)
     public String getSchoolId() {
-        return schoolId;
+        return schoolId == null? "000000": schoolId;
     }
 
     public void setSchoolId(String schoolId) {
@@ -118,7 +118,7 @@ public class Userentity {
     @Basic
     @Column(name = "birthday", nullable = true, insertable = true, updatable = true, length = 20)
     public String getBirthday() {
-        return birthday;
+        return birthday == null? "0": birthday;
     }
 
     public void setBirthday(String birthday) {
@@ -138,7 +138,7 @@ public class Userentity {
     @Basic
     @Column(name = "name", nullable = true, insertable = true, updatable = true, length = 20)
     public String getName() {
-        return name;
+        return name == null? "": name;
     }
 
     public void setName(String name) {
