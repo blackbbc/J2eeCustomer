@@ -7,6 +7,7 @@ import entity.Applicationentity;
 import entity.Goodsentity;
 import jsonObject.AppInfo;
 import jsonObject.GoodsInfo;
+import jsonObject.LatestInfo;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -134,16 +135,15 @@ public class ManagerController {
             @CookieValue(value = "loginUid") int loginUid) {
         Map<String, Object> result = new HashMap<String, Object>();
 
-        Goodsentity good1 = goodsDao.findGoodsById(1);
-        Goodsentity good2 = goodsDao.findGoodsById(1);
-
-        ArrayList<GoodsInfo> goods = new ArrayList<GoodsInfo>();
-        goods.add(new GoodsInfo(good1));
-        goods.add(new GoodsInfo(good2));
+        List<Goodsentity> goods = goodsDao.findSellGoods(loginUid, type, status, start, count);
+        ArrayList<GoodsInfo> goodsInfo = new ArrayList<GoodsInfo>();
+        for (Goodsentity good:goods) {
+            goodsInfo.add(new GoodsInfo(good));
+        }
 
         result.put("Code", 0);
         result.put("Msg", "操作成功");
-        result.put("Info", goods);
+        result.put("Info", goodsInfo);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Access-Control-Allow-Credentials", "true");

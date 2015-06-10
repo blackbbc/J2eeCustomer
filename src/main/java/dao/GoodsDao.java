@@ -66,6 +66,27 @@ public class GoodsDao {
         return results;
     }
 
+    public List<Goodsentity> findSellGoods(int userId, String type, String status, int start, int count) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Goodsentity> c = cb.createQuery(Goodsentity.class);
+        Root<Goodsentity> goods = c.from(Goodsentity.class);
+        c.select(goods);
+        if (type.equals("0")) {
+            c.where(cb.and(cb.equal(goods.get("userId"), userId), cb.equal(goods.get("status"), "2")));
+        } else {
+            c.where(cb.and(cb.equal(goods.get("userId"), userId), cb.not(cb.equal(goods.get("status"), "2")), cb.not(cb.equal(goods.get("status"), "4"))));
+        }
+        c.orderBy(cb.desc(goods.get("startTime")));
+
+        TypedQuery<Goodsentity> query = em.createQuery(c);
+        query.setFirstResult(18*(start-1));
+        query.setMaxResults(count);
+
+        List<Goodsentity> results = query.getResultList();
+
+        return results;
+    }
+
     public int createAppGoods(Goodsentity goodsentity) {
         em.persist(goodsentity);
         em.flush();
