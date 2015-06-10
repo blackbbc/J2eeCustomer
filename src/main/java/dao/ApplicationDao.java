@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -48,6 +49,15 @@ public class ApplicationDao {
 
         return results;
 
+    }
+
+    public boolean cancalApp(int appId, String reason) {
+        Query query = em.createQuery("UPDATE Applicationentity app SET app.reason = :reason, app.status = '3' where app.appId = :appId");
+        query.setParameter("reason", reason);
+        query.setParameter("appId", appId);
+
+        int updateCount = query.executeUpdate();
+        return true;
     }
 
 

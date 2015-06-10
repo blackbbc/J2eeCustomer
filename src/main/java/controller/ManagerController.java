@@ -234,4 +234,25 @@ public class ManagerController {
 
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/ApplicationCancel.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> cancelApp(
+            @RequestParam(value = "app_id") int appId,
+            @RequestParam(value = "content") String reason,
+            @CookieValue(value = "loginUid") int loginUid) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+
+        applicationService.cancelApp(appId, reason);
+
+        result.put("Code", 0);
+        result.put("Msg", "操作成功");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
 }

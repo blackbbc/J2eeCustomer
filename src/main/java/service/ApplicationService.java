@@ -53,5 +53,9 @@ public class ApplicationService {
         return applicationDao.getApps(userId, status, start, count);
     }
 
+    public boolean cancelApp(int appId, String reason) {
+        return applicationDao.cancalApp(appId, reason);
+    }
+
 
 }
