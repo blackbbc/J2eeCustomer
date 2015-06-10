@@ -36,4 +36,8 @@ public class GoodsService {
     public List<Goodsentity> getSellGoods(int userId, String type, String status, int start, int count) {
         return goodsDao.findSellGoods(userId, type, status, start, count);
     }
+
+    public boolean updateGoodsBookNum(int goodsId, int num) {
+        return goodsDao.updateBookNum(goodsId, num);
+    }
 }

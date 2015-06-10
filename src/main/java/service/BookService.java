@@ -62,4 +62,18 @@ public class BookService {
         return bookGoodsDao.findBookGoodsByBookId(bookId);
     }
 
+    public boolean bookCancel(int userId, int bookId) {
+
+        List<BookGoodsentity> bookGoods = bookGoodsDao.findBookGoodsByBookId(bookId);
+
+        for (BookGoodsentity bookGood:bookGoods) {
+            goodsDao.updateBookNum(bookGood.getGoodsId(), -bookGood.getNum());
+        }
+
+        bookDao.changeBooksStatus(bookId, "2");
+
+        return true;
+
+    }
+
 }

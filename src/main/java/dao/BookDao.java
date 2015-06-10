@@ -50,4 +50,12 @@ public class BookDao {
 
         return results;
     }
+
+    public boolean changeBooksStatus(int bookId, String status) {
+        Bookentity book = em.find(Bookentity.class, bookId);
+        book.setStatus(status);
+        em.merge(book);
+
+        return true;
+    }
 }

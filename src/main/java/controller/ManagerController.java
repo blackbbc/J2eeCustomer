@@ -148,21 +148,20 @@ public class ManagerController {
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/BookDetail", method = RequestMethod.GET)
+    @RequestMapping(value = "/BookDetail.json", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> bookDetail(
             @RequestParam(value = "status") String status,
             @RequestParam(value = "start") int start,
-            @RequestParam(value = "count") int count) {
-//            @CookieValue(value = "loginUid") int loginUid) {
+            @RequestParam(value = "count") int count,
+            @CookieValue(value = "loginUid") int loginUid) {
 
 
         Map<String, Object> result = new HashMap<String, Object>();
 
         ArrayList<Object> infos = new ArrayList<Object>();
 
-//        int userId = loginUid;
-        int userId = 8;
+        int userId = loginUid;
         List<Bookentity> books = bookService.getBooks(userId, status, start, count);
 
         for (Bookentity book:books) {
@@ -196,8 +195,29 @@ public class ManagerController {
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/BookCancel.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> bookCancel(
+            @RequestParam(value = "book_id") int bookId,
+            @CookieValue(value = "loginUid") int loginUid) {
 
-    @RequestMapping(value = "Goods", method = RequestMethod.GET)
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        bookService.bookCancel(loginUid, bookId);
+
+        result.put("Code", 0);
+        result.put("Msg", "操作成功");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
+
+
+    @RequestMapping(value = "/Goods.json", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getGoods(
             @RequestParam(value = "type") String type,
