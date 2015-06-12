@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
+import utils.Utils;
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -27,6 +28,9 @@ public class RegisterService {
     @Autowired
     private VerifyEmailDao verifyEmailDao;
 
+    @Autowired
+    private Utils utils;
+
     public Userentity getUserByEmail(String email) {
         return userDao.findUserByEmail(email);
     }
@@ -39,52 +43,6 @@ public class RegisterService {
         return verifyEmailDao.findVerifyEmailByEmail(email);
     }
 
-    public boolean sendmail(String email, String token) {
-        Properties props = System.getProperties();
-        props.put("mail.smtp.starttls.enable", true); // added this line
-        props.put("mail.smtp.ssl.trust", "mail.sweetll.me");
-        props.put("mail.smtp.host", "mail.sweetll.me");
-        props.put("mail.smtp.user", "j2ee@sweetll.me");
-        props.put("mail.smtp.password", "j2ee");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.auth", true);
-
-        Session session = Session.getInstance(props, null);
-        MimeMessage message = new MimeMessage(session);
-
-
-        try {
-            InternetAddress from = new InternetAddress("j2ee@sweetll.me");
-            message.setSubject("欢迎注册", "UTF-8");
-            message.setFrom(from);
-            message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-
-            Multipart multipart = new MimeMultipart("alternative");
-
-            BodyPart bodyPart = new MimeBodyPart();
-            String htmlMessage = "<h1>欢迎您注册</h1>";
-
-            String url = "http://localhost:12450/Home/UserActive.json?email=" + email + "&token=" + token;
-
-            htmlMessage += "<p>请点击以下链接激活邮箱：<a href='"+url+"'>"+url+"</a></p>";
-            bodyPart.setContent(htmlMessage, "text/html; charset=UTF-8");
-
-            multipart.addBodyPart(bodyPart);
-            message.setContent(multipart);
-
-            Transport transport = session.getTransport("smtp");
-            transport.connect("mail.sweetll.me", "j2ee", "j2ee");
-            transport.sendMessage(message, message.getAllRecipients());
-            return true;
-        } catch (AddressException e) {
-            e.printStackTrace();
-            return false;
-        } catch (MessagingException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     public boolean createUser(String email, String nickname, String password) {
         Long now = System.currentTimeMillis() / 1000L;
         Long tomorrow = now + 86400;
@@ -94,7 +52,8 @@ public class RegisterService {
         String token = regTime + email + password;
         token = DigestUtils.md5DigestAsHex(token.getBytes());
         if (userDao.createUser(regTime, email, nickname, password) && verifyEmailDao.createVerifyEmail(email, token, expire)) {
-            sendmail(email, token);
+            utils.sendMail(email, token);
+//            sendmail(email, token);
             return true;
         } else {
             return false;

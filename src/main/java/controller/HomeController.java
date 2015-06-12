@@ -43,9 +43,6 @@ public class HomeController {
     @Autowired
     private GoodsService goodsService;
 
-    @Autowired
-    private Utils utils;
-
     @RequestMapping(value = "/User.json", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getUser(

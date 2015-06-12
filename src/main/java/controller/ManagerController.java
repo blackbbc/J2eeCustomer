@@ -25,6 +25,7 @@ import service.ApplicationService;
 import service.BookService;
 import service.GoodsService;
 import service.UserService;
+import utils.Utils;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -55,6 +56,9 @@ public class ManagerController {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private Utils utils;
+
     @RequestMapping(value = "/UserData.json", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> userData(@RequestParam(value = "bookInfo") String bookInfo) {
@@ -71,22 +75,6 @@ public class ManagerController {
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
 
-    public static boolean saveAvatarImage(String imgData, String fileName) {
-        try {
-            byte[] imageDataBytes = Base64.decodeBase64(imgData);
-            FileOutputStream file1 = new FileOutputStream("/var/local/apache-tomcat-8.0.21/webapps/ROOT/images/uploads/users/"+fileName);
-            FileOutputStream file2 = new FileOutputStream("/home/sweet/IdeaProjects/J2ee/web/images/uploads/users/"+fileName);
-            file1.write(imageDataBytes);
-            file2.write(imageDataBytes);
-            file1.close();
-            file2.close();
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     @RequestMapping(value = "/ImgModify.json", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> imgModify(
@@ -95,7 +83,7 @@ public class ManagerController {
         Map<String, Object> result = new HashMap<String, Object>();
         String fileName = loginUid + ".png";
 
-        saveAvatarImage(imgData, fileName);
+        utils.saveAvatarImage(imgData, fileName);
         userService.changeAvatar(loginUid, fileName);
 
         result.put("Code", 0);
