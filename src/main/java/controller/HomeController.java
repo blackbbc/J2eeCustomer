@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import service.GoodsService;
 import service.LoginService;
 import service.RegisterService;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +42,9 @@ public class HomeController {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private Utils utils;
 
     @RequestMapping(value = "/User.json", method = RequestMethod.POST)
     @ResponseBody

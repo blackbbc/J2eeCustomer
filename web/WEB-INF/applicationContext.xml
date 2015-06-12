@@ -28,4 +28,6 @@
           <property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
    </bean>
 
+    <bean id="Utils" class="utils.Utils" />
+
 </beans>
