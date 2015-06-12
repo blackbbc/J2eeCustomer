@@ -21,7 +21,6 @@ import service.GoodsService;
 import service.LoginService;
 import service.RegisterService;
 
-import javax.servlet.http.Cookie;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -104,7 +103,6 @@ public class HomeController {
             String loginKey = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
             headers.add("Set-Cookie", "loginUid="+loginUid+"; expires=Sun, 20-Jun-2016 10:42:28 GMT; path=/");
             headers.add("Set-Cookie", "loginKey="+loginKey+"; expires=Sun, 20-Jun-2016 10:42:28 GMT; path=/");
-//            headers.add("Set-Cookie", "loginKey=2235a3b4f6413566b89c83d95fb3429b; expires=Sun, 20-Jun-2015 10:42:28 GMT; path=/");
             result.put("Code", 0);
             result.put("Msg", "操作成功");
             result.put("Info", info);

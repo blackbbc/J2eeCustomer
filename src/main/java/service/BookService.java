@@ -11,6 +11,7 @@ import entity.Userentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +49,7 @@ public class BookService {
                 bookGoodsDao.createBookGoods(newBook);
                 goodsDao.updateBookNum(info.get("gid"), info.get("num"));
             } else {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return false;
             }
         }

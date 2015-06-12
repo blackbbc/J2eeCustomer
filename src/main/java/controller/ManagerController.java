@@ -74,9 +74,12 @@ public class ManagerController {
     public static boolean saveAvatarImage(String imgData, String fileName) {
         try {
             byte[] imageDataBytes = Base64.decodeBase64(imgData);
-            FileOutputStream file = new FileOutputStream("/var/local/apache-tomcat-8.0.21/webapps/ROOT/images/uploads/users/"+fileName);
-            file.write(imageDataBytes);
-            file.close();
+            FileOutputStream file1 = new FileOutputStream("/var/local/apache-tomcat-8.0.21/webapps/ROOT/images/uploads/users/"+fileName);
+            FileOutputStream file2 = new FileOutputStream("/home/sweet/IdeaProjects/J2ee/web/images/uploads/users/"+fileName);
+            file1.write(imageDataBytes);
+            file2.write(imageDataBytes);
+            file1.close();
+            file2.close();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
