@@ -43,6 +43,26 @@ public class VerifyEmailDao {
         }
     }
 
+    public VerifyEmailentity findVerifyEmailByToken(String token) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<VerifyEmailentity> c = cb.createQuery(VerifyEmailentity.class);
+        Root<VerifyEmailentity> verifyEmail = c.from(VerifyEmailentity.class);
+        c.select(verifyEmail);
+        ParameterExpression<String> p = cb.parameter(String.class);
+        c.where(cb.equal(verifyEmail.get("token"), p));
+
+        TypedQuery<VerifyEmailentity> query = em.createQuery(c);
+        query.setParameter(p, token);
+
+        List<VerifyEmailentity> results = query.getResultList();
+
+        if (results.isEmpty()) {
+            return null;
+        } else {
+            return results.get(0);
+        }
+    }
+
     public boolean createVerifyEmail(String email, String token, String expire) {
         VerifyEmailentity verifyEmailentity = new VerifyEmailentity(email, token, expire);
         em.merge(verifyEmailentity);

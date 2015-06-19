@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import service.GoodsService;
 import service.LoginService;
 import service.RegisterService;
+import service.UserService;
 import utils.Utils;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +44,9 @@ public class HomeController {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/User.json", method = RequestMethod.POST)
     @ResponseBody
@@ -151,14 +156,63 @@ public class HomeController {
 
     @RequestMapping(value = "/Forget.json", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> forget (@RequestParam(value = "email") String email) {
+    public ResponseEntity<Map<String, Object>> addForget (@RequestParam(value = "email") String email) {
         Map<String, Object> result = new HashMap<String, Object>();
 
         //To do 账户不存在或发送成功
+        if (userService.addForget(email)) {
+            result.put("Code", 0);
+            result.put("Msg", "操作成功");
+        } else {
+            result.put("Code", 1049);
+            result.put("Msg", "账号错误");
+        }
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Access-Control-Allow-Credentials", "true");
         headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/ForgetPW.json", method = RequestMethod.GET)
+    public String verifyForget (
+            Model model,
+            @RequestParam("email") String email,
+            @RequestParam("token") String token,
+            HttpSession session) {
+
+        if (userService.verifyForget(email, token)) {
+            session.setAttribute("email", email);
+            return "pw";
+        } else {
+            model.addAttribute("result", "非法来源");
+            return "active";
+        }
+    }
+
+    @RequestMapping(value = "/ForgetPW.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateForget (
+            @RequestParam("newWord") String newPS,
+            HttpSession session) {
+        Map<String, Object> result = new HashMap();
+
+        String email = "" + session.getAttribute("email");
+
+        if (email != null) {
+            userService.forgetPS(email, newPS);
+            session.removeAttribute("email");
+
+            result.put("Code", 0);
+            result.put("Msg", "操作成功");
+        } else {
+            result.put("Code", 3001);
+            result.put("Msg", "非法来源");
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "*");
 
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }
