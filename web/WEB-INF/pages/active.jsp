@@ -8,9 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <meta http-equiv="refresh" content="5;url=http://localhost:3000">
+
+    <title>消息提醒</title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-    <h1>${result}</h1>
+    <div id="react">
+        <div class="table">
+            <h1 id="header">${result}</h1>
+            <p id="info">5秒钟后自动跳转到首页</p>
+        </div>
+    </div>
 </body>
 </html>

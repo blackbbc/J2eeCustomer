@@ -45,4 +45,14 @@ public class UserService {
             return true;
         }
     }
+
+    public boolean addForget(String email) {
+
+        return true;
+    }
+
+    public boolean verifyForget(String email, String token) {
+
+        return true;
+    }
 }

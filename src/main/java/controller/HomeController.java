@@ -137,11 +137,11 @@ public class HomeController {
         String myToken = userentity.getRegTime() + userentity.getEmail() + userentity.getPassword();
         myToken = DigestUtils.md5DigestAsHex(myToken.getBytes());
         if (userentity.getStatus() == "2") {
-            model.addAttribute("result", "您已激活!");
+            model.addAttribute("result", "您已激活");
         } else if (verifyEmailentity == null) {
-            model.addAttribute("result", "该记录不存在!");
+            model.addAttribute("result", "该链接已失效，请确认账户的激活状态");
         } else if (!token.equals(myToken)) {
-            model.addAttribute("result", "该链接无效！请检查账户！");
+            model.addAttribute("result", "该链接无效");
         } else {
             registerService.activeUser(email);
             model.addAttribute("result", "激活成功！");

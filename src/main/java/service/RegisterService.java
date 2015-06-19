@@ -53,7 +53,6 @@ public class RegisterService {
         token = DigestUtils.md5DigestAsHex(token.getBytes());
         if (userDao.createUser(regTime, email, nickname, password) && verifyEmailDao.createVerifyEmail(email, token, expire)) {
             utils.sendMail(email, token);
-//            sendmail(email, token);
             return true;
         } else {
             return false;
