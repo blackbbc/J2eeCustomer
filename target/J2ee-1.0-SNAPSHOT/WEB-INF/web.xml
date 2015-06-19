@@ -20,6 +20,15 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <context-param>
+        <param-name>root</param-name>
+        <param-value>/var/local/apache-tomcat-8.0.21/webapps/ROOT/</param-value>
+    </context-param>
+    <context-param>
+        <param-name>source</param-name>
+        <param-value>/home/sweet/IdeaProjects/J2ee/web/</param-value>
+    </context-param>
+
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

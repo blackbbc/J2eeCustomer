@@ -1,9 +1,11 @@
 package utils;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.servlet.ServletContext;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -12,13 +14,19 @@ import java.util.Properties;
  * Created by sweet on 15-6-12.
  */
 public class Utils {
+
+    @Autowired
+    private ServletContext servletContext;
+
     public Utils(){}
 
     public boolean saveAvatarImage(String imgData, String fileName) {
         try {
             byte[] imageDataBytes = Base64.decodeBase64(imgData);
-            FileOutputStream file1 = new FileOutputStream("/var/local/apache-tomcat-8.0.21/webapps/ROOT/images/uploads/users/"+fileName);
-            FileOutputStream file2 = new FileOutputStream("/home/sweet/IdeaProjects/J2ee/web/images/uploads/users/"+fileName);
+            FileOutputStream file1 = new FileOutputStream(servletContext.getInitParameter("root")+"images/uploads/users/"+fileName);
+            FileOutputStream file2 = new FileOutputStream(servletContext.getInitParameter("source")+"images/uploads/users/"+fileName);
+//            FileOutputStream file1 = new FileOutputStream("/var/local/apache-tomcat-8.0.21/webapps/ROOT/images/uploads/users/"+fileName);
+//            FileOutputStream file2 = new FileOutputStream("/home/sweet/IdeaProjects/J2ee/web/images/uploads/users/"+fileName);
             file1.write(imageDataBytes);
             file2.write(imageDataBytes);
             file1.close();
