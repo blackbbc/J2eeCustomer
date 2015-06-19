@@ -61,16 +61,22 @@ public class ManagerController {
 
     @RequestMapping(value = "/UserData.json", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> userData(@RequestParam(value = "bookInfo") String bookInfo) {
+    public ResponseEntity<Map<String, Object>> userData(
+            @RequestParam(value = "telephone", required = false) String telephone,
+            @RequestParam(value = "alipay", required = false) String alipay,
+            @RequestParam(value = "signature", required = false) String signature,
+            @RequestParam(value = "name", required = false) String name,
+            @CookieValue(value = "loginUid") int loginUid) {
         Map<String, Object> result = new HashMap<String, Object>();
-        Gson gson = new Gson();
-        ArrayList<HashMap<String, Integer>> book = gson.fromJson(bookInfo, ArrayList.class);
+
+        userService.updateInfo(loginUid, telephone, alipay, signature, name);
 
         result.put("Code", 0);
         result.put("Msg", "操作成功");
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin", "*");
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
 
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }

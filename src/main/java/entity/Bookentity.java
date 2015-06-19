@@ -51,7 +51,7 @@ public class Bookentity {
     }
 
     @Basic
-    @Column(name = "delivery", nullable = false, insertable = true, updatable = true, length = 20)
+    @Column(name = "delivery", nullable = false, insertable = true, updatable = true, length = 255)
     public String getDelivery() {
         return delivery;
     }

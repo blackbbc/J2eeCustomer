@@ -21,6 +21,7 @@ public class Userentity {
     private String name;
     private String path;
     private String signature;
+    private String alipay;
 
     public Userentity() {}
 
@@ -32,6 +33,7 @@ public class Userentity {
         this.nickname = nickname;
         this.gender = "B";
         this.signature = "";
+        this.alipay = "";
         this.path = "http://localhost:12450/images/default.jpeg";
     }
 
@@ -203,5 +205,15 @@ public class Userentity {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    @Basic
+    @Column(name = "alipay", nullable = false, insertable = true, updatable = true, length = 20)
+    public String getAlipay() {
+        return alipay;
+    }
+
+    public void setAlipay(String alipay) {
+        this.alipay = alipay;
     }
 }

@@ -82,6 +82,11 @@ public class UserDao {
         return true;
     }
 
+    public boolean updateUser(Userentity userentity) {
+        em.merge(userentity);
+        return true;
+    }
+
     public boolean changeAvatar(int userId, String fileName) {
         Query query = em.createQuery("UPDATE Userentity ur SET ur.path = :path where ur.userId = :userId");
         query.setParameter("path", "http://localhost:12450/Uploads/users/" + fileName);

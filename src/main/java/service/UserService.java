@@ -1,6 +1,7 @@
 package service;
 
 import dao.UserDao;
+import entity.Userentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,5 +18,21 @@ public class UserService {
 
     public boolean changeAvatar(int userId, String fileName) {
         return userDao.changeAvatar(userId, fileName);
+    }
+
+    public boolean updateInfo(int userId, String telephone, String alipay, String signature, String name) {
+        Userentity userentity = userDao.findUserById(userId);
+        if (telephone != null)
+            userentity.setTelephone(telephone);
+        if (alipay != null)
+            userentity.setAlipay(alipay);
+        if (signature != null)
+            userentity.setSignature(signature);
+        if (name != null)
+            userentity.setName(name);
+
+        userDao.updateUser(userentity);
+
+        return true;
     }
 }
