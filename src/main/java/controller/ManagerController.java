@@ -107,14 +107,21 @@ public class ManagerController {
     @ResponseBody
     public ResponseEntity<Map<String, Object>> psModify(
             @RequestParam(value = "old") String oldPS,
-            @RequestParam(value = "new") String newPS) {
+            @RequestParam(value = "new") String newPS,
+            @CookieValue(value = "loginUid") int loginUid) {
         Map<String, Object> result = new HashMap<String, Object>();
 
-        result.put("Code", 0);
-        result.put("Msg", "操作成功");
+        if (userService.modifyPS(loginUid, oldPS, newPS)) {
+            result.put("Code", 0);
+            result.put("Msg", "操作成功");
+        } else {
+            result.put("Code", 1030);
+            result.put("Msg", "密码错误");
+        }
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Access-Control-Allow-Origin", "*");
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
 
         return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
     }

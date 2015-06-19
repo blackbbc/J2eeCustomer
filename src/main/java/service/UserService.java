@@ -35,4 +35,14 @@ public class UserService {
 
         return true;
     }
+
+    public boolean modifyPS(int userId, String oldPS, String newPS) {
+        Userentity userentity = userDao.findUserById(userId);
+        if (!userentity.getPassword().equals(oldPS)) {
+            return false;
+        } else {
+            userDao.changePS(userId, newPS);
+            return true;
+        }
+    }
 }

@@ -95,4 +95,14 @@ public class UserDao {
         int updateCount = query.executeUpdate();
         return true;
     }
+
+    public boolean changePS(int userId, String password) {
+        Query query = em.createQuery("UPDATE Userentity ur SET ur.password = :password where ur.userId = :userId");
+        query.setParameter("password", password);
+        query.setParameter("userId", userId);
+
+        int updateCount = query.executeUpdate();
+
+        return true;
+    }
 }

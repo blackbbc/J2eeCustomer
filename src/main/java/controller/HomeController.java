@@ -149,6 +149,20 @@ public class HomeController {
         return "active";
     }
 
+    @RequestMapping(value = "/Forget.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> forget (@RequestParam(value = "email") String email) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        //To do 账户不存在或发送成功
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Credentials", "true");
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
+
+        return new ResponseEntity<Map<String, Object>>(result, headers, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/Car.json", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> getCar() {
