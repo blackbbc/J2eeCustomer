@@ -25,7 +25,17 @@ public class GoodsDao {
     void setEm(EntityManager entityManager) {this.em = entityManager;}
 
     public Goodsentity findGoodsById(int id) {
-        return em.find(Goodsentity.class, id);
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Goodsentity> c = cb.createQuery(Goodsentity.class);
+        Root<Goodsentity> goods = c.from(Goodsentity.class);
+        c.select(goods);
+        c.where(cb.equal(goods.get("goodsId"), id));
+
+        TypedQuery<Goodsentity> query = em.createQuery(c);
+
+        List<Goodsentity> results = query.getResultList();
+
+        return results.get(0);
     }
 
     public List<Goodsentity> findLatestGoods() {
@@ -41,11 +51,7 @@ public class GoodsDao {
 
         List<Goodsentity> results = query.getResultList();
 
-        if (results.isEmpty()) {
-            return null;
-        } else {
-            return results;
-        }
+        return results;
     }
 
     public List<Goodsentity> findGoods(String keyWord, String type_id, int page) {
