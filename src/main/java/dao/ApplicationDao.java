@@ -46,6 +46,8 @@ public class ApplicationDao {
         query.setMaxResults(count);
 
         List<Applicationentity> results = query.getResultList();
+        for (Applicationentity result:results)
+            em.refresh(result);
 
         return results;
 

@@ -33,9 +33,11 @@ public class GoodsDao {
 
         TypedQuery<Goodsentity> query = em.createQuery(c);
 
-        List<Goodsentity> results = query.getResultList();
+        Goodsentity result = query.getSingleResult();
 
-        return results.get(0);
+        em.refresh(result);
+
+        return result;
     }
 
     public List<Goodsentity> findLatestGoods() {
@@ -50,6 +52,9 @@ public class GoodsDao {
         query.setMaxResults(8);
 
         List<Goodsentity> results = query.getResultList();
+
+        for (Goodsentity good: results)
+            em.refresh(good);
 
         return results;
     }
@@ -69,6 +74,9 @@ public class GoodsDao {
         query.setMaxResults(18);
 
         List<Goodsentity> results = query.getResultList();
+
+        for (Goodsentity good: results)
+            em.refresh(good);
 
         return results;
     }
@@ -90,6 +98,8 @@ public class GoodsDao {
         query.setMaxResults(count);
 
         List<Goodsentity> results = query.getResultList();
+        for (Goodsentity good: results)
+            em.refresh(good);
 
         return results;
     }

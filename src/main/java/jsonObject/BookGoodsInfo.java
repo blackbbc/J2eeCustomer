@@ -10,20 +10,30 @@ public class BookGoodsInfo {
     String f_user_id;
     String goods_id;
     String name;
+    String type_id;
     String nickname;
     String num;
     String path;
     String price;
 
-    public BookGoodsInfo(BookGoodsentity book) {
+    public BookGoodsInfo(BookGoodsentity book, String type_id) {
         this.book_id = "" + book.getBookId();
         this.f_user_id = "" + book.getfUserId();
         this.goods_id = "" + book.getBookId();
         this.name = book.getName();
+        this.type_id = type_id;
         this.nickname = book.getNickname();
         this.num = "" + book.getNum();
         this.path = book.getPath();
         this.price = String.format("%2f", book.getPrice());
+    }
+
+    public String getType_id() {
+        return type_id;
+    }
+
+    public void setType_id(String type_id) {
+        this.type_id = type_id;
     }
 
     public String getBook_id() {

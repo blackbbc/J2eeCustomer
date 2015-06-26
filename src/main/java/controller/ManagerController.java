@@ -173,7 +173,8 @@ public class ManagerController {
             List<BookGoodsentity> bookGoods = bookService.getBookGoods(book.getBookId());
             List<BookGoodsInfo> details = new ArrayList<BookGoodsInfo>();
             for (BookGoodsentity bookgood:bookGoods) {
-                details.add(new BookGoodsInfo(bookgood));
+                Goodsentity detailGood = goodsService.getGoodsById(bookgood.getGoodsId());
+                details.add(new BookGoodsInfo(bookgood, detailGood.getTypeId()));
             }
             info.put("b_mid", ""+book.getbMid());
             info.put("book_id", ""+book.getBookId());

@@ -38,6 +38,8 @@ public class BookGoodsDao {
         TypedQuery<BookGoodsentity> query = em.createQuery(c);
 
         List<BookGoodsentity> results = query.getResultList();
+        for (BookGoodsentity result:results)
+            em.refresh(result);
 
         return results;
     }

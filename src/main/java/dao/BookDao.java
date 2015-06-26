@@ -47,6 +47,8 @@ public class BookDao {
         query.setMaxResults(count);
 
         List<Bookentity> results = query.getResultList();
+        for (Bookentity result:results)
+            em.refresh(result);
 
         return results;
     }
